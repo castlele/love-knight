@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=4 uid="uid://doris1iw7cosv"]
+
+[ext_resource type="PackedScene" uid="uid://cq8sy1vk5mixh" path="res://player/player.tscn" id="1_3krec"]
+[ext_resource type="Texture2D" uid="uid://xjcl5kh0k7ij" path="res://res/tiles/experimental_block.png" id="2_mhjg5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nac3j"]
+texture = ExtResource("2_mhjg5")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_134j5"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_nac3j")
+
+[node name="Debug" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+position = Vector2(265, 689)
+tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAD3////AAAAAAAAAAD4////AAAAAAAAAAD5////AAAAAAAAAAD6////AAAAAAAAAAD7////AAAAAAAAAAD8////AAAAAAAAAAD9////AAAAAAAAAAD+////AAAAAAAAAAD/////AAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAHAP//AAAAAAAAAAAIAP//AAAAAAAAAAAJAP//AAAAAAAAAADz////AAAAAAAAAAD0////AAAAAAAAAAD1////AAAAAAAAAAD2////AAAAAAAAAAAKAP//AAAAAAAAAAALAP//AAAAAAAAAAAMAP//AAAAAAAAAAANAP7/AAAAAAAAAAANAP3/AAAAAAAAAAANAPz/AAAAAAAAAAANAPv/AAAAAAAAAAANAPr/AAAAAAAAAAANAPb/AAAAAAAAAAANAPf/AAAAAAAAAAANAPj/AAAAAAAAAAANAPn/AAAAAAAAAADy//b/AAAAAAAAAADy//f/AAAAAAAAAADy//j/AAAAAAAAAADy//n/AAAAAAAAAADy//r/AAAAAAAAAADy//v/AAAAAAAAAADy//z/AAAAAAAAAADy//3/AAAAAAAAAADy//7/AAAAAAAAAAD2//z/AAAAAAAAAAD3//z/AAAAAAAAAAD4//z/AAAAAAAAAAD7//n/AAAAAAAAAAD8//n/AAAAAAAAAAD9//n/AAAAAAAAAAD+//n/AAAAAAAAAAD5//X/AAAAAAAAAAD4//X/AAAAAAAAAAD3//X/AAAAAAAAAAD2//X/AAAAAAAAAAD1//X/AAAAAAAAAAAMAPz/AAAAAAAAAAALAPz/AAAAAAAAAAAKAPz/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_134j5")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_3krec")]
+position = Vector2(258, 656)

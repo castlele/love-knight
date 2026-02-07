@@ -1,0 +1,134 @@
+[gd_scene load_steps=19 format=3 uid="uid://cq8sy1vk5mixh"]
+
+[ext_resource type="Texture2D" uid="uid://b4ha4qevctfu2" path="res://res/sprite-sheet/player-sheet.png" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://3rm1dpoet45t" path="res://player/player.gd" id="1_rkbax"]
+[ext_resource type="Script" uid="uid://bpwbuthxvcefc" path="res://player/input/input_controller.gd" id="3_yw30f"]
+[ext_resource type="Script" uid="uid://djhsmhv16ch8y" path="res://player/animation/animation_controller.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://bdqhphu8uvth3" path="res://player/animation/IDLE.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://1f511c2wmjew" path="res://player/movement/movement_controller.gd" id="5_qjkh3"]
+[ext_resource type="Script" uid="uid://0nrrokqh6iyo" path="res://player/animation/run_left.gd" id="6_rgyib"]
+[ext_resource type="Script" uid="uid://co252hautww13" path="res://player/animation/run_right.gd" id="7_hg6s5"]
+[ext_resource type="Script" uid="uid://dccqxbpnxn6ma" path="res://player/animation/jump_left.gd" id="8_8t03j"]
+[ext_resource type="Script" uid="uid://dlhx2yop7r7h4" path="res://player/animation/jump_right.gd" id="9_2ieo8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjkh3"]
+atlas = ExtResource("1_oul6g")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6k8r"]
+atlas = ExtResource("1_oul6g")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boad6"]
+atlas = ExtResource("1_oul6g")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgyib"]
+atlas = ExtResource("1_oul6g")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hg6s5"]
+atlas = ExtResource("1_oul6g")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t03j"]
+atlas = ExtResource("1_oul6g")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ieo8"]
+atlas = ExtResource("1_oul6g")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ebec5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjkh3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6k8r")
+}],
+"loop": true,
+"name": &"jump_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boad6")
+}],
+"loop": true,
+"name": &"jump_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgyib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hg6s5")
+}],
+"loop": true,
+"name": &"run_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t03j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ieo8")
+}],
+"loop": true,
+"name": &"run_right",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_rkbax")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ebec5")
+animation = &"jump_left"
+offset = Vector2(0, -24)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(5, 0, -5, 0, -5, -9, -9, -9, -9, -22, -6, -22, -6, -36, 6, -36, 6, -22, 9, -22, 9, -9, 5, -9)
+
+[node name="InputController" type="Node" parent="."]
+script = ExtResource("3_yw30f")
+
+[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_qjkh3")
+animation_player = NodePath("../AnimatedSprite2D")
+
+[node name="IDLE" type="Node" parent="AnimationController"]
+script = ExtResource("5_g6k8r")
+
+[node name="RunLeft" type="Node" parent="AnimationController"]
+script = ExtResource("6_rgyib")
+
+[node name="RunRight" type="Node" parent="AnimationController"]
+script = ExtResource("7_hg6s5")
+
+[node name="JumpLeft" type="Node" parent="AnimationController"]
+script = ExtResource("8_8t03j")
+
+[node name="JumpRight" type="Node" parent="AnimationController"]
+script = ExtResource("9_2ieo8")
+
+[node name="MovementController" type="Node" parent="."]
+script = ExtResource("5_qjkh3")
+
+[node name="CoyoteTimer" type="Timer" parent="MovementController"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -24)
+limit_smoothed = true
+position_smoothing_enabled = true

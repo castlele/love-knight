@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerState" load_steps=2 format=3 uid="uid://cmrke6p334yin"]
+
+[ext_resource type="Script" uid="uid://c6aty11b0fh3j" path="res://player/resource/player_state.gd" id="1_fhqfd"]
+
+[resource]
+script = ExtResource("1_fhqfd")
+velocity = 1000.0
+jump_velocity = null
+metadata/_custom_type_script = "uid://c6aty11b0fh3j"
