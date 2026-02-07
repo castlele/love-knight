@@ -1,6 +1,6 @@
 extends Node
 
-@export var speed: int = 200
+@export var speed: int = 220
 @export var jump_velocity: int = speed * 2
 @export var acceleration: int = 50
 @export var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
